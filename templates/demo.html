@@ -1,30 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Metadata Generator</title>
+  <title>MetaCraftAI Demo</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
+<div class="container">
 
-<h2>Upload Image</h2>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h3>Metadata Settings</h3>
 
-<form method="POST" enctype="multipart/form-data">
-  <input type="file" name="image" accept="image/*" required>
-  <br><br>
-  <button type="submit">Generate Metadata</button>
-</form>
+    <label>Title Words</label>
+    <input type="range" min="8" max="20">
 
-{% if image %}
-  <h3>Preview</h3>
-  <img src="/{{ image }}" width="300">
-{% endif %}
+    <label>Keywords</label>
+    <input type="range" min="30" max="50">
 
-{% if metadata %}
-  <h3>Generated Metadata</h3>
-  <p><b>Title:</b> {{ metadata.title }}</p>
-  <p><b>Keywords:</b> {{ metadata.keywords }}</p>
-  <p><b>Description:</b> {{ metadata.description }}</p>
-{% endif %}
+    <label>Description</label>
+    <input type="range" min="15" max="40">
 
+    <div class="toggle">
+      <input type="checkbox"> Single-word keywords
+    </div>
+
+    <div class="toggle">
+      <input type="checkbox"> Transparent background
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- UPLOAD -->
+    <div class="card">
+      <h2>Upload Image</h2>
+
+      <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Generate Metadata</button>
+      </form>
+
+      {% if image %}
+        <img src="/{{ image }}" class="preview">
+      {% endif %}
+    </div>
+
+    <!-- RESULT -->
+    <div class="card">
+      <h2>Generated Metadata</h2>
+
+      {% if metadata %}
+        <p><b>Title:</b><br>{{ metadata.title }}</p>
+        <p><b>Keywords:</b><br>{{ metadata.keywords }}</p>
+        <p><b>Description:</b><br>{{ metadata.description }}</p>
+      {% else %}
+        <p>No result yet</p>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
