@@ -2,102 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MetaCraftAI – Demo</title>
+  <title>MetaCraftAI – Image Metadata Generator</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
-<div class="container">
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">MetaCraft<span>AI</span></div>
+  <nav>
+    <a href="#">Tools</a>
+    <a href="#">Pricing</a>
+    <a href="#">Login</a>
+  </nav>
+</header>
 
-  <!-- LEFT SIDEBAR (PIXCRAFT STYLE) -->
+<!-- APP -->
+<div class="app">
+
+  <!-- SIDEBAR -->
   <aside class="sidebar">
-    <h2 class="logo">MetaCraftAI</h2>
+    <h3>Generation Settings</h3>
 
-    <div class="section">
-      <h4>Title Length</h4>
-      <input type="range" min="8" max="20">
+    <label>Title Length</label>
+    <input type="range" min="5" max="20">
+
+    <label>Keyword Count</label>
+    <input type="range" min="20" max="50">
+
+    <label>Description Length</label>
+    <input type="range" min="15" max="40">
+
+    <div class="checkbox">
+      <input type="checkbox"> Single-word keywords
     </div>
 
-    <div class="section">
-      <h4>Keywords Count</h4>
-      <input type="range" min="20" max="50">
-    </div>
-
-    <div class="section">
-      <h4>Description Length</h4>
-      <input type="range" min="15" max="40">
-    </div>
-
-    <div class="section toggle">
-      <label>
-        <input type="checkbox"> Single-word keywords
-      </label>
-    </div>
-
-    <div class="section toggle">
-      <label>
-        <input type="checkbox"> SEO optimized
-      </label>
-    </div>
-
-    <div class="section toggle">
-      <label>
-        <input type="checkbox"> Stock photo safe
-      </label>
+    <div class="checkbox">
+      <input type="checkbox"> SEO optimized
     </div>
   </aside>
 
   <!-- MAIN CONTENT -->
-  <main class="main">
+  <main class="content">
 
-    <!-- UPLOAD PANEL -->
-    <div class="card upload-card">
-      <h3>Upload Image</h3>
-
-      <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required>
-
-        <button type="submit" class="primary-btn">
-          Generate Metadata
-        </button>
-      </form>
-
-      {% if image %}
-        <div class="preview-box">
-          <img src="/{{ image }}" alt="Preview">
-        </div>
-      {% endif %}
+    <!-- TOOL TABS -->
+    <div class="tabs">
+      <button class="active">Metadata</button>
+      <button disabled>Upscaler</button>
+      <button disabled>BG Remover</button>
     </div>
 
-    <!-- RESULT PANEL -->
-    <div class="card result-card">
-      <h3>Generated Metadata</h3>
+    <div class="workspace">
 
-      {% if metadata %}
-        <div class="result-block">
-          <label>Title</label>
-          <p>{{ metadata.title }}</p>
-        </div>
+      <!-- UPLOAD -->
+      <div class="card">
+        <h2>Upload Image</h2>
 
-        <div class="result-block">
-          <label>Keywords</label>
-          <p>{{ metadata.keywords }}</p>
-        </div>
+        <form method="POST" enctype="multipart/form-data">
+          <input type="file" name="image" accept="image/*" required>
+          <button type="submit">Generate</button>
+        </form>
 
-        <div class="result-block">
-          <label>Description</label>
-          <p>{{ metadata.description }}</p>
-        </div>
-      {% else %}
-        <p class="placeholder">
-          Upload an image to generate metadata
-        </p>
-      {% endif %}
+        {% if image %}
+          <img src="/{{ image }}" class="preview">
+        {% endif %}
+      </div>
+
+      <!-- RESULT -->
+      <div class="card">
+        <h2>Generated Metadata</h2>
+
+        {% if metadata %}
+          <div class="result">
+            <strong>Title</strong>
+            <p>{{ metadata.title }}</p>
+
+            <strong>Keywords</strong>
+            <p>{{ metadata.keywords }}</p>
+
+            <strong>Description</strong>
+            <p>{{ metadata.description }}</p>
+          </div>
+        {% else %}
+          <p class="placeholder">Upload an image to see results</p>
+        {% endif %}
+      </div>
+
     </div>
-
   </main>
+
 </div>
 
 </body>
 </html>
+
