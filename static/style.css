@@ -1,10 +1,24 @@
 body {
-  font-family: Arial;
-  background: #0f0f0f;
+  background: #0b0b0b;
   color: white;
+  font-family: Arial;
   text-align: center;
+  padding: 30px;
 }
 
-a {
-  color: #00ffaa;
+input, button {
+  padding: 10px;
+  margin: 10px;
+}
+
+button {
+  background: #00ffaa;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+img {
+  margin-top: 15px;
+  border-radius: 10px;
 }
