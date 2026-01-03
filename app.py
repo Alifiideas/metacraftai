@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request
 import os
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
+app.config["UPLOAD_FOLDER"] = "uploads"
+
+os.makedirs("uploads", exist_ok=True)
 
 @app.route("/")
 def home():
@@ -10,16 +13,24 @@ def home():
 @app.route("/demo", methods=["GET", "POST"])
 def demo():
     metadata = None
+    image_url = None
+
     if request.method == "POST":
-        metadata = {
-            "title": "Beautiful Sunset Over Mountains",
-            "keywords": "sunset, mountains, nature, landscape",
-            "description": "A high-quality image of a colorful sunset over mountains."
-        }
-    return render_template("demo.html", metadata=metadata)
+        image = request.files["image"]
+        if image:
+            path = os.path.join(app.config["UPLOAD_FOLDER"], image.filename)
+            image.save(path)
 
-# IMPORTANT: Render uses gunicorn, not app.run()
+            image_url = path
+
+            # 🔹 DEMO metadata (fake AI)
+            metadata = {
+                "title": "High quality stock photo",
+                "keywords": "business, technology, modern, professional, clean",
+                "description": "A professional high resolution image suitable for commercial use."
+            }
+
+    return render_template("demo.html", metadata=metadata, image=image_url)
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
-
+    app.run()
