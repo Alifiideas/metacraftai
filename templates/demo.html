@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Demo</title>
+  <title>AI Metadata Generator</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <h2>Metadata Generator Demo</h2>
 
-  <form method="post">
-    <button type="submit">Generate Metadata</button>
-  </form>
+<h2>Upload Image</h2>
 
-  {% if metadata %}
-    <h3>Result</h3>
-    <p><b>Title:</b> {{ metadata.title }}</p>
-    <p><b>Keywords:</b> {{ metadata.keywords }}</p>
-    <p><b>Description:</b> {{ metadata.description }}</p>
-  {% endif %}
+<form method="POST" enctype="multipart/form-data">
+  <input type="file" name="image" accept="image/*" required>
+  <br><br>
+  <button type="submit">Generate Metadata</button>
+</form>
+
+{% if image %}
+  <h3>Preview</h3>
+  <img src="/{{ image }}" width="300">
+{% endif %}
+
+{% if metadata %}
+  <h3>Generated Metadata</h3>
+  <p><b>Title:</b> {{ metadata.title }}</p>
+  <p><b>Keywords:</b> {{ metadata.keywords }}</p>
+  <p><b>Description:</b> {{ metadata.description }}</p>
+{% endif %}
+
 </body>
 </html>
