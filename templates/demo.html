@@ -1,66 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>MetaCraftAI Demo</title>
+  <meta charset="UTF-8">
+  <title>MetaCraftAI – Demo</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
+
 <div class="container">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <h3>Metadata Settings</h3>
+  <!-- LEFT SIDEBAR (PIXCRAFT STYLE) -->
+  <aside class="sidebar">
+    <h2 class="logo">MetaCraftAI</h2>
 
-    <label>Title Words</label>
-    <input type="range" min="8" max="20">
-
-    <label>Keywords</label>
-    <input type="range" min="30" max="50">
-
-    <label>Description</label>
-    <input type="range" min="15" max="40">
-
-    <div class="toggle">
-      <input type="checkbox"> Single-word keywords
+    <div class="section">
+      <h4>Title Length</h4>
+      <input type="range" min="8" max="20">
     </div>
 
-    <div class="toggle">
-      <input type="checkbox"> Transparent background
+    <div class="section">
+      <h4>Keywords Count</h4>
+      <input type="range" min="20" max="50">
     </div>
-  </div>
 
-  <!-- MAIN -->
-  <div class="main">
+    <div class="section">
+      <h4>Description Length</h4>
+      <input type="range" min="15" max="40">
+    </div>
 
-    <!-- UPLOAD -->
-    <div class="card">
-      <h2>Upload Image</h2>
+    <div class="section toggle">
+      <label>
+        <input type="checkbox"> Single-word keywords
+      </label>
+    </div>
+
+    <div class="section toggle">
+      <label>
+        <input type="checkbox"> SEO optimized
+      </label>
+    </div>
+
+    <div class="section toggle">
+      <label>
+        <input type="checkbox"> Stock photo safe
+      </label>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- UPLOAD PANEL -->
+    <div class="card upload-card">
+      <h3>Upload Image</h3>
 
       <form method="POST" enctype="multipart/form-data">
         <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Generate Metadata</button>
+
+        <button type="submit" class="primary-btn">
+          Generate Metadata
+        </button>
       </form>
 
       {% if image %}
-        <img src="/{{ image }}" class="preview">
+        <div class="preview-box">
+          <img src="/{{ image }}" alt="Preview">
+        </div>
       {% endif %}
     </div>
 
-    <!-- RESULT -->
-    <div class="card">
-      <h2>Generated Metadata</h2>
+    <!-- RESULT PANEL -->
+    <div class="card result-card">
+      <h3>Generated Metadata</h3>
 
       {% if metadata %}
-        <p><b>Title:</b><br>{{ metadata.title }}</p>
-        <p><b>Keywords:</b><br>{{ metadata.keywords }}</p>
-        <p><b>Description:</b><br>{{ metadata.description }}</p>
+        <div class="result-block">
+          <label>Title</label>
+          <p>{{ metadata.title }}</p>
+        </div>
+
+        <div class="result-block">
+          <label>Keywords</label>
+          <p>{{ metadata.keywords }}</p>
+        </div>
+
+        <div class="result-block">
+          <label>Description</label>
+          <p>{{ metadata.description }}</p>
+        </div>
       {% else %}
-        <p>No result yet</p>
+        <p class="placeholder">
+          Upload an image to generate metadata
+        </p>
       {% endif %}
     </div>
 
-  </div>
+  </main>
 </div>
+
 </body>
 </html>
