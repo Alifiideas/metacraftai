@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1b2236, #0b0e14);
+  color: #fff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+}
+
+.logo span {
+  color: #5aa2ff;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 80px 60px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #5aa2ff, #8b6cff);
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
