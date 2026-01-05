@@ -1,7 +1,20 @@
-export default function App() {
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Features from "./components/Features";
+import Pricing from "./components/Pricing";
+import FAQ from "./components/FAQ";
+import "./index.css";
+
+function App() {
   return (
-    <div style={{ padding: "40px", fontSize: "24px" }}>
-      ✅ My website is working!
-    </div>
+    <>
+      <Navbar />
+      <Hero />
+      <Features />
+      <Pricing />
+      <FAQ />
+    </>
   );
 }
+
+export default App;
